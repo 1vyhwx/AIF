@@ -28,7 +28,7 @@
       margin-top: 15px;
       font-weight: bold;
     }
-    input, select, textarea {
+    input, select {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
@@ -48,6 +48,16 @@
     button:hover {
       background-color: #ff85c1;
     }
+    #result {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      color: #555;
+    }
     .footer {
       text-align: center;
       margin-top: 20px;
@@ -60,15 +70,15 @@
 
 <h1>✨ Perfume Customization Survey ✨</h1>
 
-<form>
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
+<form id="surveyForm">
+  <label>Name:</label>
+  <input type="text" id="name" required>
 
-  <label for="pronouns">Pronouns:</label>
-  <input type="text" id="pronouns" name="pronouns" placeholder="e.g., she/her, he/him, they/them">
+  <label>Pronouns:</label>
+  <input type="text" id="pronouns" placeholder="e.g., she/her, he/him, they/them">
 
-  <label for="gender">Gender:</label>
-  <select id="gender" name="gender" required>
+  <label>Gender:</label>
+  <select id="gender" required>
     <option value="Male">Male</option>
     <option value="Female">Female</option>
     <option value="Non-binary">Non-binary</option>
@@ -76,8 +86,8 @@
     <option value="Other">Other</option>
   </select>
 
-  <label for="age">Age Group:</label>
-  <select id="age" name="age" required>
+  <label>Age Group:</label>
+  <select id="age" required>
     <option value="Under 18">Under 18</option>
     <option value="18-25">18-25</option>
     <option value="26-40">26-40</option>
@@ -85,8 +95,8 @@
     <option value="Over 60">Over 60</option>
   </select>
 
-  <label for="occupation">Occupation:</label>
-  <select id="occupation" name="occupation" required>
+  <label>Occupation:</label>
+  <select id="occupation" required>
     <option value="Student">Student</option>
     <option value="Working Professional">Working Professional</option>
     <option value="Outdoor Worker">Outdoor Worker</option>
@@ -95,8 +105,8 @@
     <option value="Other">Other</option>
   </select>
 
-  <label for="scenario">When will you wear this perfume?</label>
-  <select id="scenario" name="scenario" required>
+  <label>When will you wear this perfume?</label>
+  <select id="scenario" required>
     <option value="Daily">Daily Use</option>
     <option value="Special Events">Special Events</option>
     <option value="Romantic Moments">Romantic Moments</option>
@@ -104,8 +114,8 @@
     <option value="Adventure">Adventure</option>
   </select>
 
-  <label for="vibe">Desired Vibe:</label>
-  <select id="vibe" name="vibe" required>
+  <label>Desired Vibe:</label>
+  <select id="vibe" required>
     <option value="Fresh & Clean">Fresh & Clean</option>
     <option value="Subtle & Elegant">Subtle & Elegant</option>
     <option value="Energetic & Bright">Energetic & Bright</option>
@@ -118,8 +128,8 @@
     <option value="Free-Spirited & Bright">Free-Spirited & Bright</option>
   </select>
 
-  <label for="scent_family">Preferred Scent Family:</label>
-  <select id="scent_family" name="scent_family" required>
+  <label>Preferred Scent Family:</label>
+  <select id="scent_family" required>
     <option value="Citrus">Citrus</option>
     <option value="Floral">Floral</option>
     <option value="Woody">Woody</option>
@@ -130,8 +140,8 @@
     <option value="Amber">Amber</option>
   </select>
 
-  <label for="longevity">Desired Longevity:</label>
-  <select id="longevity" name="longevity" required>
+  <label>Desired Longevity:</label>
+  <select id="longevity" required>
     <option value="Light">Light (2-4 hours)</option>
     <option value="Medium">Medium (6-8 hours)</option>
     <option value="Strong">Strong (10+ hours)</option>
@@ -140,9 +150,49 @@
   <button type="submit">Submit Survey</button>
 </form>
 
+<div id="result"></div>
+
 <div class="footer">
   ✨ Data collected by Ivy.H ✨
 </div>
+
+<script>
+document.getElementById('surveyForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const age = document.getElementById('age').value;
+  const occupation = document.getElementById('occupation').value;
+  const scenario = document.getElementById('scenario').value;
+  const vibe = document.getElementById('vibe').value;
+  const scent_family = document.getElementById('scent_family').value;
+
+  let recommendation = \"No match found.\";
+
+  // Simple matching rules like we did in Python
+  if (age === \"Under 18\" && occupation === \"Student\" && scenario === \"Daily\" && vibe === \"Fresh & Clean\" && scent_family === \"Citrus\") {
+    recommendation = \"Clinique Happy or Marc Jacobs Daisy Eau So Fresh\";
+  } else if (age === \"Under 18\" && occupation === \"Student\" && scenario === \"Special Events\" && vibe === \"Bold & Glamorous\" && scent_family === \"Floral\") {
+    recommendation = \"Ariana Grande Cloud Pink or Miss Dior Blooming Bouquet\";
+  } else if (age === \"Under 18\" && occupation === \"Student\" && scenario === \"Romantic Moments\" && vibe === \"Soft & Sweet\" && scent_family === \"Fruity\") {
+    recommendation = \"Escada Candy Love or Victoria's Secret Tease\";
+  } else if (scent_family === \"Floral\") {
+    recommendation = \"Chloe Eau de Parfum or Gucci Bloom\";
+  } else if (scent_family === \"Woody\") {
+    recommendation = \"Tom Ford Oud Wood or Le Labo Another 13\";
+  } else if (scent_family === \"Citrus\") {
+    recommendation = \"Dior Eau Sauvage or Jo Malone Lime Basil & Mandarin\";
+  } else if (scent_family === \"Fruity\") {
+    recommendation = \"Escada Cherry in the Air or Ariana Grande Sweet Like Candy\";
+  } else if (scent_family === \"Sweet\") {
+    recommendation = \"Kayali Vanilla 28 or Viktor & Rolf Bonbon\";
+  } else if (scent_family === \"Amber\") {
+    recommendation = \"YSL Black Opium or Givenchy L'Interdit\";
+  }
+
+  document.getElementById('result').innerHTML = `🎀 Hi ${name}! Your recommended perfumes are: <br><strong>${recommendation}</strong> 🎀`;
+});
+</script>
 
 </body>
 </html>
