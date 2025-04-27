@@ -6,7 +6,7 @@
   <title>Perfume Customization Survey ✨</title>
   <style>
     body {
-      background: linear-gradient(to bottom right, #f9f1f7, #e0f7fa);
+      background: linear-gradient(to bottom right, #fce4ec, #e0f7fa);
       font-family: 'Poppins', sans-serif;
       padding: 20px;
       color: #5d5d5d;
@@ -14,6 +14,7 @@
     h1 {
       text-align: center;
       color: #ff80ab;
+      font-size: 2.5em;
     }
     form {
       max-width: 600px;
@@ -59,18 +60,18 @@
 </head>
 <body>
 
-<h1>✨ Perfume Customization Survey ✨</h1>
+<h1>✨ Welcome, Perfume Angel ✨</h1>
 
-<form name="perfume-survey" method="POST" data-netlify="true" action="thank-you.html">
+<form id="surveyForm" name="perfume-survey" method="POST" data-netlify="true" action="thank-you.html">
   <input type="hidden" name="form-name" value="perfume-survey">
 
-  <label for="name">Name:</label>
+  <label>Name:</label>
   <input type="text" id="name" name="name" required>
 
-  <label for="pronouns">Pronouns:</label>
+  <label>Pronouns:</label>
   <input type="text" id="pronouns" name="pronouns" placeholder="she/her, he/him, they/them">
 
-  <label for="gender">Gender:</label>
+  <label>Gender:</label>
   <select id="gender" name="gender" required>
     <option value="Male">Male</option>
     <option value="Female">Female</option>
@@ -79,7 +80,7 @@
     <option value="Other">Other</option>
   </select>
 
-  <label for="age">Age Group:</label>
+  <label>Age Group:</label>
   <select id="age" name="age" required>
     <option value="Under 18">Under 18</option>
     <option value="18-25">18-25</option>
@@ -88,7 +89,7 @@
     <option value="Over 60">Over 60</option>
   </select>
 
-  <label for="occupation">Occupation:</label>
+  <label>Occupation:</label>
   <select id="occupation" name="occupation" required>
     <option value="Student">Student</option>
     <option value="Working Professional">Working Professional</option>
@@ -98,7 +99,7 @@
     <option value="Other">Other</option>
   </select>
 
-  <label for="scenario">When will you wear this perfume?</label>
+  <label>When will you wear this perfume?</label>
   <select id="scenario" name="scenario" required>
     <option value="Daily">Daily Use</option>
     <option value="Special Events">Special Events</option>
@@ -107,7 +108,7 @@
     <option value="Adventure">Adventure</option>
   </select>
 
-  <label for="vibe">Desired Vibe:</label>
+  <label>Desired Vibe:</label>
   <select id="vibe" name="vibe" required>
     <option value="Fresh & Clean">Fresh & Clean</option>
     <option value="Subtle & Elegant">Subtle & Elegant</option>
@@ -121,7 +122,7 @@
     <option value="Free-Spirited & Bright">Free-Spirited & Bright</option>
   </select>
 
-  <label for="scent_family">Preferred Scent Family:</label>
+  <label>Preferred Scent Family:</label>
   <select id="scent_family" name="scent_family" required>
     <option value="Citrus">Citrus</option>
     <option value="Floral">Floral</option>
@@ -133,19 +134,45 @@
     <option value="Amber">Amber</option>
   </select>
 
-  <label for="longevity">Desired Longevity:</label>
+  <label>Desired Longevity:</label>
   <select id="longevity" name="longevity" required>
     <option value="Light">Light (2-4 hours)</option>
     <option value="Medium">Medium (6-8 hours)</option>
     <option value="Strong">Strong (10+ hours)</option>
   </select>
 
-  <button type="submit">Submit Survey</button>
+  <button type="submit">Submit Survey ✨</button>
 </form>
 
 <div class="footer">
   ✨ Data collected by Ivy.H ✨
 </div>
+
+<script>
+document.getElementById('surveyForm').addEventListener('submit', function(event) {
+  const vibe = document.getElementById('vibe').value;
+  const scent = document.getElementById('scent_family').value;
+
+  let recommendation = \"A surprise perfume awaits you! ✨\";
+
+  if (vibe === \"Fresh & Clean\" && scent === \"Citrus\") {
+    recommendation = \"Clinique Happy or Marc Jacobs Daisy Eau So Fresh\";
+  } else if (vibe === \"Dreamy & Romantic\" && scent === \"Floral\") {
+    recommendation = \"Chanel Chance Eau Tendre or Gucci Bloom\";
+  } else if (vibe === \"Energetic & Bright\" && scent === \"Fruity\") {
+    recommendation = \"Escada Sorbetto Rosso or Hollister Wave\";
+  } else if (vibe === \"Soft & Sweet\" && scent === \"Sweet\") {
+    recommendation = \"Ariana Grande Cloud or Kayali Vanilla 28\";
+  } else if (vibe === \"Earthy & Natural\" && scent === \"Woody\") {
+    recommendation = \"Le Labo Another 13 or Jo Malone Wood Sage & Sea Salt\";
+  } else if (vibe === \"Bold & Glamorous\" && scent === \"Amber\") {
+    recommendation = \"YSL Black Opium or Givenchy L'Interdit\";
+  }
+
+  // Save recommendation to localStorage
+  localStorage.setItem('perfumeRecommendation', recommendation);
+});
+</script>
 
 </body>
 </html>
