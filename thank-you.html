@@ -6,7 +6,7 @@
   <title>Thank You! ✨</title>
   <style>
     body {
-      background: linear-gradient(to bottom right, #f9fbe7, #fff3e0);
+      background: linear-gradient(to bottom right, #fff3f7, #f3f8ff);
       font-family: 'Poppins', sans-serif;
       text-align: center;
       padding: 50px;
@@ -18,7 +18,17 @@
     }
     p {
       margin-top: 20px;
-      font-size: 1.2em;
+      font-size: 1.4em;
+    }
+    .recommendation {
+      margin-top: 30px;
+      background: #ffe4f2;
+      padding: 20px;
+      border-radius: 15px;
+      display: inline-block;
+      font-size: 1.5em;
+      color: #ff4081;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .button {
       margin-top: 30px;
@@ -37,11 +47,19 @@
 </head>
 <body>
 
-<h1>🎀 Thank You! 🎀</h1>
-<p>Your responses have been submitted successfully! ✨</p>
-<p>We'll find your perfect perfume match soon. 🌸</p>
+<h1>🎀 Thank You, Beautiful! 🎀</h1>
+<p>Your answers have been recorded. Here’s your magical perfume match: ✨</p>
 
-<a href="index.html" class="button">Submit Another Response</a>
+<div class="recommendation" id="recommendationArea">
+  Loading your perfect scent... 🌸
+</div>
+
+<a href="index.html" class="button">Take the Survey Again</a>
+
+<script>
+const recommendation = localStorage.getItem('perfumeRecommendation');
+document.getElementById('recommendationArea').innerText = recommendation || \"A surprise perfume awaits you! ✨\";
+</script>
 
 </body>
 </html>
