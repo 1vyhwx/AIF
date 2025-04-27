@@ -60,7 +60,7 @@
 </head>
 <body>
 
-<h1>✨ Welcome, Perfume Angel ✨</h1>
+<h1>✨ Welcome to Your Perfume Journey ✨</h1>
 
 <form id="surveyForm" name="perfume-survey" method="POST" data-netlify="true" action="thank-you.html">
   <input type="hidden" name="form-name" value="perfume-survey">
@@ -150,6 +150,8 @@
 
 <script>
 document.getElementById('surveyForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // STOP immediately submitting first!
+
   const vibe = document.getElementById('vibe').value;
   const scent = document.getElementById('scent_family').value;
 
@@ -169,8 +171,11 @@ document.getElementById('surveyForm').addEventListener('submit', function(event)
     recommendation = \"YSL Black Opium or Givenchy L'Interdit\";
   }
 
-  // Save recommendation to localStorage
+  // Save the recommendation
   localStorage.setItem('perfumeRecommendation', recommendation);
+
+  // Now finally submit the form to Netlify!
+  event.target.submit();
 });
 </script>
 
